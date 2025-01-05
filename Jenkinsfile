@@ -26,18 +26,18 @@ pipeline {
     stage('Push') {
       steps {
         script {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds_id') {
+          docker.withRegistry('https://registry.hub.docker.com', env.DOCKER_CREDENTIALS) {
+            def app = docker.image("${env.IMAGE_NAME}:${env.BUILD_NUMBER}")
             app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            app.push("latest")}
           }
+
         }
-
       }
-    }
 
+    }
+    environment {
+      DOCKER_CREDENTIALS = 'yunsergey'
+      IMAGE_NAME = 'YunSergey/cicd-pipeline'
+    }
   }
-  environment {
-    DOCKER_CREDENTIALS = 'yunsergey'
-    IMAGE_NAME = 'YunSergey/cicd-pipeline'
-  }
-}

@@ -20,19 +20,8 @@ pipeline {
       }
     }
 
-    stage('Push docker image') {
-      steps {
-        script {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds_id')
-
-          {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-          }
-        }
-
-      }
-    }
-
+  }
+  environment {
+    test_name = 'test_value'
   }
 }

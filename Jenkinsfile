@@ -38,6 +38,6 @@ pipeline {
     }
     environment {
       DOCKER_CREDENTIALS = 'yunsergey'
-      IMAGE_NAME = 'YunSergey/cicd-pipeline'
+      IMAGE_NAME = 'yunsergey/cicd-pipeline'
     }
   }

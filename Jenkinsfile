@@ -38,5 +38,6 @@ pipeline {
     DOCKER_REGISTRY = 'registry.hub.docker.com'
     DOCKER_CREDENTIALS_ID = 'yunsergey'
     BUILD_NUMBER = 'latest'
+    app = ''
   }
 }

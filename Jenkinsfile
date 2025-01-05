@@ -34,10 +34,6 @@ pipeline {
 
   }
   environment {
-    IMAGE_NAME = 'my_image'
-    DOCKER_REGISTRY = 'registry.hub.docker.com'
-    DOCKER_CREDENTIALS_ID = 'yunsergey'
-    BUILD_NUMBER = 'latest'
-    app = ''
+    app = '\'\''
   }
 }

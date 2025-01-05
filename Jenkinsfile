@@ -16,18 +16,19 @@ pipeline {
 
     stage('Build a docker image') {
       steps {
-        sh 'docker build -t my_image .'
+        script {
+          app = docker.build("${env.IMAGE_NAME}:${env.BUILD_NUMBER}")
+        }
+
       }
     }
 
     stage('Push') {
       steps {
         script {
-          def dockerImage = "mydockerhubuser/my_image:${env.BUILD_NUMBER}"
-          docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds_id') {
-            def app = docker.image(dockerImage)
-            app.push() // Push with the build number as tag
-            app.push('latest') // Push with the 'latest' tag
+          docker.withRegistry("https://${env.DOCKER_REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
           }
         }
 
@@ -36,6 +37,8 @@ pipeline {
 
   }
   environment {
-    test_name = 'test_value'
+    IMAGE_NAME = 'my_image'
+    DOCKER_REGISTRY = 'registry.hub.docker.com'
+    DOCKER_CREDENTIALS_ID = 'yunsergey'
   }
 }

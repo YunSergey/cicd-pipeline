@@ -20,17 +20,5 @@ pipeline {
       }
     }
 
-    stage('Push') {
-      steps {
-        script {
-          docker.withRegistry("https://${env.DOCKER_REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-          }
-        }
-
-      }
-
   }
-}
 }

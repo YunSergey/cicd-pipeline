@@ -16,7 +16,10 @@ pipeline {
 
     stage('Build a docker image') {
       steps {
-        sh 'docker build -t my_image .'
+        script {
+          docker.build("${env.IMAGE_NAME}:${env.BUILD_NUMBER}")
+        }
+
       }
     }
 
@@ -34,6 +37,7 @@ pipeline {
 
   }
   environment {
-    app = '\'\''
+    DOCKER_CREDENTIALS = 'yunsergey'
+    IMAGE_NAME = 'YunSergey/cicd-pipeline'
   }
 }
